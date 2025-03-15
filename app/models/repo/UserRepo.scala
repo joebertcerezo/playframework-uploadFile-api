@@ -39,5 +39,16 @@ class UserRepo @Inject() (
     def find(id: UUID): Future[Option[User]] = {
       db.run(this.filter(_.id === id).result.headOption)
     }
+
+    def find(usernameOrEmail: String): Future[Option[User]] = {
+      db.run(
+        this
+          .filter(x =>
+            x.username === usernameOrEmail || x.email === usernameOrEmail
+          )
+          .result
+          .headOption
+      )
+    }
   }
 }
