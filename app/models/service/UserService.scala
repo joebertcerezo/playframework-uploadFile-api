@@ -19,10 +19,12 @@ import repo.*
 class UserService @Inject() (
     val userRepo: UserRepo
 ) {
-  def create(user: User): EitherT[Future, ResponseError, ResponseSuccess] = {
+  def create(
+      user: UserCreate
+  ): EitherT[Future, ResponseError, ResponseSuccess] = {
     for {
       result <- EitherT {
-        userRepo.Table.create(user).map(_ => Right(UserCreated))
+        userRepo.Table.create(user.toDomain).map(_ => Right(UserCreated))
       }
     } yield result
   }
