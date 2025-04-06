@@ -22,7 +22,7 @@ class UserController @Inject() (
 ) extends AbstractController(cc)
     with I18nSupport {
   def create = Action.async { implicit request =>
-    FormHandler.execute(UserForm.create)(userCreate => userService.create(userCreate))
+    FormHandler.execute(UserForm.create)(userService.create)
   }
 }
 
