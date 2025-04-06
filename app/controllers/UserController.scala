@@ -8,7 +8,7 @@ import play.api.*
 import play.api.mvc.* // ControllerComponents
 import play.api.i18n.I18nSupport
 import play.api.data.Forms.* //form types
-import play.api.data.Form //form
+import play.api.data.Form    //form
 
 import models.service.UserService
 import models.auth.*
@@ -29,10 +29,10 @@ class UserController @Inject() (
 object UserForm {
   val create = Form(
     mapping(
-      "name"            -> nonEmptyText,
-      "email"           -> email,
-      "password"        -> nonEmptyText(minLength = 6),
-      "confirmPassword" -> nonEmptyText(minLength = 6)
+      "name"     -> nonEmptyText,
+      "email"    -> email,
+      "username" -> nonEmptyText,
+      "password" -> nonEmptyText(minLength = 6)
     )(UserCreate.apply)(UserCreate.unapply)
   )
 }
