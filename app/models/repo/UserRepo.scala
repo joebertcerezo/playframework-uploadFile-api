@@ -20,13 +20,13 @@ class UserRepo @Inject() (
 ) extends HasDatabaseConfigProvider[JdbcProfile] {
   import dbConfig.profile.api.*
 
-  class UserTable(tag: Tag) extends Table[User](tag, "USER") {
+  class UserTable(tag: Tag) extends Table[User](tag, "USERS") {
     val id       = column[UUID]("ID", O.PrimaryKey)
     val name     = column[String]("NAME")
     val email    = column[String]("EMAIL")
     val username = column[String]("USERNAME")
     val password = column[String]("PASSWORD")
-    val avatar   = column[Option[String]]("PASSWORD")
+    val avatar   = column[Option[String]]("AVATAR")
 
     def * = (id, name, email, username, password, avatar).mapTo[User]
   }
