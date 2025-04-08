@@ -4,9 +4,23 @@ package types
 
 import java.util.UUID
 
+import play.api.libs.json.*
+import play.api.data.format.Formatter
+
+import JsonFormats.*
+
 opaque type IdUser = UUID
 object IdUser {
-  def apply(value: IdUser)      = value
+  def apply(value: UUID): IdUser = value
+
+  given Format[IdUser] =
+    opaqueFormat(_.validate[UUID], value => JsString(value.toString()))
+
+  given Formatter[IdUser] = opaqueFormatter(
+    value => IdUser(UUID.fromString(value)),
+    _.toString
+  )
+
   def fromString(value: String) = UUID.fromString(value)
 
   extension (x: IdUser)
