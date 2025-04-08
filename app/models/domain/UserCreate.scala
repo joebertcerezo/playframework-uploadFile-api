@@ -3,9 +3,11 @@ package domain
 
 import play.api.libs.json.*
 
+import types.*
+
 case class UserCreate(
     name: String,
-    email: String,
+    email: EmailUser,
     username: String,
     password: String
 ) {
@@ -16,7 +18,7 @@ object UserCreate {
   given Format[UserCreate] = Json.format[UserCreate]
   def unapply(
       u: UserCreate
-  ): Option[(String, String, String, String)] = Some(
+  ): Option[(String, EmailUser, String, String)] = Some(
     Tuple.fromProductTyped(u)
   )
 }
