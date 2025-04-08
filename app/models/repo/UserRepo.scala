@@ -12,6 +12,7 @@ import play.api.db.slick.*
 
 import slick.jdbc.JdbcProfile
 
+import domain.types.*
 import domain.*
 
 @Singleton
@@ -21,7 +22,7 @@ class UserRepo @Inject() (
   import dbConfig.profile.api.*
 
   class UserTable(tag: Tag) extends Table[User](tag, "USERS") {
-    val id       = column[UUID]("ID", O.PrimaryKey)
+    val id       = column[IdUser]("ID", O.PrimaryKey)
     val name     = column[String]("NAME")
     val email    = column[String]("EMAIL")
     val username = column[String]("USERNAME")
@@ -36,7 +37,7 @@ class UserRepo @Inject() (
       db.run(this += user)
     }
 
-    def find(id: UUID): Future[Option[User]] = {
+    def find(id: IdUser): Future[Option[User]] = {
       db.run(this.filter(_.id === id).result.headOption)
     }
 
