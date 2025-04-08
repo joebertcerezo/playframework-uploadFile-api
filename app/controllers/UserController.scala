@@ -13,6 +13,7 @@ import play.api.data.Form    //form
 import models.service.UserService
 import models.auth.*
 import models.domain.*
+import models.domain.types.*
 
 @Singleton
 class UserController @Inject() (
@@ -30,7 +31,7 @@ object UserForm {
   val create = Form(
     mapping(
       "name"     -> nonEmptyText,
-      "email"    -> email,
+      "email"    -> of[EmailUser],
       "username" -> nonEmptyText,
       "password" -> nonEmptyText(minLength = 6)
     )(UserCreate.apply)(UserCreate.unapply)
