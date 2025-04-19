@@ -5,4 +5,5 @@ object Dependencies {
   val postgres   = "42.7.5" // "42.7.4"
   val catsCore   = "2.12.0"
   val jbcrypt    = "0.4"
+  val pdfBox     = "3.0.4"
 }
