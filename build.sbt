@@ -19,7 +19,8 @@ libraryDependencies ++= Seq(
   "org.mindrot"             % "jbcrypt"               % jbcrypt,
   "org.typelevel"          %% "cats-core"             % catsCore,
   "org.playframework"      %% "play-mailer"           % playMailer,
-  "org.playframework"      %% "play-mailer-guice"     % playMailer
+  "org.playframework"      %% "play-mailer-guice"     % playMailer,
+  "org.apache.pdfbox"       % "pdfbox"                % pdfBox
 )
 
 // Adds additional packages into Twirl
