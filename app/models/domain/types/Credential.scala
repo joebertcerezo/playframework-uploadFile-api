@@ -4,6 +4,7 @@ package types
 
 import play.api.libs.json.*
 import play.api.data.format.Formatter
+import play.api.data.format.Formats.stringFormat
 
 import JsonFormats.*
 
@@ -14,7 +15,9 @@ object Credential {
   given Format[Credential] =
     opaqueFormat(_.validate[Credential], value => JsString(value.toString()))
 
-  given Formatter[Credential] = opaqueFormatter(Credential.apply, _.value)
+  given Formatter[Credential] =
+    opaqueFormatter(Credential.apply, _.value)(using stringFormat)
+  
   extension (c: Credential) {
     def value: String = c
   }
