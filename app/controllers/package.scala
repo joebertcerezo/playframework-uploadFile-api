@@ -15,17 +15,14 @@ import models.domain.*
 package object controllers {
   object FormHandler {
 
-    def execute[T](
-        form: Form[T]
-    )(action: T => EitherT[Future, ResponseError, ResponseSuccess])(using
-        Request[AnyContent],
-        MessagesProvider
-    ): Future[Result] =
+    def execute[T, A](form: Form[T])(
+        action: T => EitherT[Future, ResponseError, ResponseSuccess]
+    )(using req: Request[A], mp: MessagesProvider): Future[Result] =
       form
         .bindFromRequest()
         .fold(
           error => Future(invalid(error)),
-          action(_).fold(_.toResult, _.toResult)
+          value => action(value).fold(_.toResult, _.toResult)
         )
 
     def invalid[T](
