@@ -6,6 +6,7 @@ import java.util.UUID
 
 import play.api.libs.json.*
 import play.api.data.format.Formatter
+import play.api.data.format.Formats.uuidFormat
 
 import JsonFormats.*
 
@@ -16,10 +17,10 @@ object IdUser {
   given Format[IdUser] =
     opaqueFormat(_.validate[UUID], value => JsString(value.toString()))
 
-  given Formatter[IdUser] = opaqueFormatter(
-    value => IdUser(UUID.fromString(value)),
-    _.toString
-  )
+  given Formatter[IdUser] = opaqueFormatter[UUID, IdUser](
+    apply = IdUser.apply, // UUID => IdUser
+    extract = _.value     // IdUser => UUID
+  )(using uuidFormat)
 
   def fromString(value: String) = UUID.fromString(value)
 
