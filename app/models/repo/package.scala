@@ -12,4 +12,7 @@ package object repo {
 
   given JdbcType[IdUser] =
     MappedColumnType.base[IdUser, UUID](_.value, IdUser.apply)
+
+  given JdbcType[IdFile] =
+    MappedColumnType.base[IdFile, UUID](_.value, IdFile.apply)
 }
