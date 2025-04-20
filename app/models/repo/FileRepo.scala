@@ -23,7 +23,7 @@ class FileRepo @Inject() (
     val id   = column[IdFile]("ID", O.PrimaryKey)
     val name = column[String]("NAME")
     val path = column[String]("PATH")
-    val idUser = column[IdUser]("IDUSER")
+    val idUser = column[Option[IdUser]]("IDUSER")
 
     def * = (id, name, path, idUser).mapTo[File]
   }
