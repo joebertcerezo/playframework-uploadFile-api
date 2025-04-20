@@ -13,7 +13,7 @@ import cats.data.*
 import cats.implicits.*
 
 import domain.*
-import repo.*
+import repo.UserRepo
 
 @Singleton
 class UserService @Inject() (
