@@ -2,7 +2,6 @@ package models
 package service
 
 import javax.inject.*
-import play.api.libs.json.*
 import java.util.UUID
 import java.nio.file.Paths
 import java.nio.file.Files
@@ -13,6 +12,7 @@ import scala.util.Failure
 import scala.concurrent.*
 import scala.concurrent.ExecutionContext.Implicits.global
 
+import play.api.libs.json.*
 import play.api.libs.Files.TemporaryFile
 import play.api.mvc.MultipartFormData.FilePart
 
@@ -69,27 +69,26 @@ class FileService @Inject() (
       // Create domain model
       file <- EitherT.pure[Future, ResponseError] {
         File(
-          name = fileCreate.name,
+          name = filePart.filename,
           path = filePath.toString
         )
       }
 
       // Persist to database
-      _ <- EitherT {
+      result <- EitherT {
         val fileCreated = fileCreate.toDomain(filePath.toString())
         println(fileCreated)
         fileRepo.Table
           .create(fileCreated)
-          .map(Right(_))
-          .recover { case e => Left(FileMoveFailed) }
+          .map(_ => Right(FileCreated(fileCreated)))
       }
 
       // Build response
       metadata = Json.obj(
-        "id"     -> file.id,
-        "name"   -> file.name,
-        "path"   -> file.path
+        "id"   -> file.id,
+        "name" -> file.name,
+        "path" -> file.path
       )
-    } yield FileCreated(metadata)
+    } yield result
   }
 }
