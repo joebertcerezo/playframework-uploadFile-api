@@ -24,8 +24,8 @@ class UserRepo @Inject() (
   class UserTable(tag: Tag) extends Table[User](tag, "USERS") {
     val id       = column[IdUser]("ID", O.PrimaryKey)
     val name     = column[String]("NAME")
-    val email    = column[String]("EMAIL")
-    val username = column[String]("USERNAME")
+    val email    = column[EmailUser]("EMAIL")
+    val username = column[Username]("USERNAME")
     val password = column[String]("PASSWORD")
     val avatar   = column[Option[String]]("AVATAR")
 
@@ -41,11 +41,12 @@ class UserRepo @Inject() (
       db.run(this.filter(_.id === id).result.headOption)
     }
 
-    def find(usernameOrEmail: String): Future[Option[User]] = {
+    @targetName("findByCredential")
+    def find(usernameOrEmail: Credential): Future[Option[User]] = {
       db.run(
         this
           .filter(x =>
-            x.username === usernameOrEmail || x.email === usernameOrEmail
+            x.username === usernameOrEmail.asUsername || x.email === usernameOrEmail.asEmail
           )
           .result
           .headOption
