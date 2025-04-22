@@ -8,7 +8,7 @@ import types.*
 case class UserCreate(
     name: String,
     email: EmailUser,
-    username: String,
+    username: Username,
     password: String
 ) {
   def toDomain: User = User(name, email, username, password)
@@ -18,7 +18,7 @@ object UserCreate {
   given Format[UserCreate] = Json.format[UserCreate]
   def unapply(
       u: UserCreate
-  ): Option[(String, EmailUser, String, String)] = Some(
+  ): Option[(String, EmailUser, Username, String)] = Some(
     Tuple.fromProductTyped(u)
   )
 }
