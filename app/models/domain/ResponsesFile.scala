@@ -4,9 +4,10 @@ package domain
 import play.api.libs.json.*
 import play.api.mvc.Results.*
 
-def FileCreated(data: JsValue) = ResponseSuccess(
+def FileCreated(data: File) = ResponseSuccess(
   "FILE_CREATED",
-  Created
+  Created,
+  Json.toJson(data)
 )
 
 def FileMoveFailed = ResponseError(
