@@ -48,7 +48,7 @@ class FileController @Inject() (
               Json.obj(
                 "code" -> "INVALID_FILE",
                 "data" -> Json.obj(
-                  "file" -> "Invalid file. Only PDF allowed, max 10MB."
+                  "file" -> "Invalid file. Only image allowed, max 5MB."
                 )
               )
             )
