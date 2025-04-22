@@ -13,7 +13,7 @@ object Credential {
   def apply(value: String): Credential = value
 
   given Format[Credential] =
-    opaqueFormat(_.validate[Credential], value => JsString(value.toString()))
+    opaqueFormat(_.validate[String], value => JsString(value.toString()))
 
   given Formatter[Credential] =
     opaqueFormatter(Credential.apply, _.value)(using stringFormat)
