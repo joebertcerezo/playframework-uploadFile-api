@@ -11,7 +11,7 @@ case class User(
     id: IdUser,
     name: String,
     email: EmailUser,
-    username: String,
+    username: Username,
     password: String,
     avatar: Option[String]
 )
@@ -22,14 +22,15 @@ object User {
   def apply(
       name: String,
       email: EmailUser,
-      username: String,
+      username: Username,
       password: String,
   ): User =
     new User(IdUser(UUID.randomUUID()), name, email, username, password, None)
 
   def unapply(
       u: User
-  ): Option[(IdUser, String, EmailUser, String, String, Option[String])] = Some(
-    Tuple.fromProductTyped(u)
-  )
+  ): Option[(IdUser, String, EmailUser, Username, String, Option[String])] =
+    Some(
+      Tuple.fromProductTyped(u)
+    )
 }
