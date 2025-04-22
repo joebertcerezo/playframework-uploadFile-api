@@ -32,7 +32,7 @@ object UserForm {
     mapping(
       "name"     -> nonEmptyText,
       "email"    -> of[EmailUser],
-      "username" -> nonEmptyText,
+      "username" -> of[Username],
       "password" -> nonEmptyText(minLength = 6)
     )(UserCreate.apply)(UserCreate.unapply)
   )
