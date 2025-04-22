@@ -17,8 +17,10 @@ object Credential {
 
   given Formatter[Credential] =
     opaqueFormatter(Credential.apply, _.value)(using stringFormat)
-  
+
   extension (c: Credential) {
-    def value: String = c
+    def value: String        = c
+    def asEmail: EmailUser   = EmailUser(c)
+    def asUsername: Username = Username(c)
   }
 }
