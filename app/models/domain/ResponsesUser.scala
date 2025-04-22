@@ -10,3 +10,8 @@ def UserCreated = ResponseSuccess(
   "USER_CREATED",
   Created
 )
+
+def UserDoesNotExist = ResponseError(
+  "USER_NOT_FOUND",
+  NotFound
+)
