@@ -23,4 +23,8 @@ class HomeController @Inject() (val controllerComponents: ControllerComponents)
   def index() = Action { implicit request: Request[AnyContent] =>
     Ok(Json.obj("message" -> "connected"))
   }
+
+  def index1 = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.mail())
+  }
 }
