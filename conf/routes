@@ -5,12 +5,16 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index()
+GET     /show                           controllers.HomeController.index1
 
 # User Controller
 POST    /users                      controllers.UserController.create
 
 # File Controller
 POST    /files                      controllers.FileController.create
+
+# Mailer Controller
+POST    /mail                       controllers.MailerController.create
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
