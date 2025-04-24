@@ -33,7 +33,7 @@ class MailerService @Inject() (
       result <- EitherT {
         val emailContent = Email(
           "Im the subject",
-          "fromMe@gmail.com",
+          "procerezo@gmail.com",
           Seq("hackdog195@gmail.com"),
           bodyText = Some(views.html.mail().body),
           bodyHtml = Some(views.html.mail().body)
