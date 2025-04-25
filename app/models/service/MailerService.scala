@@ -20,16 +20,6 @@ class MailerService @Inject() (
 
   def create: EitherT[Future, ResponseError, ResponseSuccess] = {
     for {
-      // _ <- "".asInstanceOf[EitherT[Future, ResponseError, ResponseSuccess]]
-      // emailContent <- EitherT.right(
-      //   Email(
-      //     "Im the subject",
-      //     "fromMe@gmail.com",
-      //     Seq("hackdog195@gmail.com"),
-      //     bodyText = Some(views.html.mail().body),
-      //     bodyHtml = Some(views.html.mail().body)
-      //   )
-      // )
       result <- EitherT {
         val emailContent = Email(
           "Im the subject",
