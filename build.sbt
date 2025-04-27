@@ -20,6 +20,9 @@ libraryDependencies ++= Seq(
   "org.typelevel"          %% "cats-core"             % catsCore,
   "org.playframework"      %% "play-mailer"           % playMailer,
   "org.playframework"      %% "play-mailer-guice"     % playMailer,
+  "org.apache.pdfbox"       % "pdfbox"                % pdfBox,
+  "org.bouncycastle"        % "bcprov-jdk18on"        % bouncyCastle_bcprov,
+  "org.bouncycastle"        % "bcpkix-jdk18on"        % bouncyCastle_bcpkix,
   "org.apache.pdfbox"       % "pdfbox"                % pdfBox
 )
 
