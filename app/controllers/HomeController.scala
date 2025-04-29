@@ -6,12 +6,19 @@ import play.api.*
 import play.api.mvc.*
 import play.api.libs.json.*
 
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.*
+
+import models.service.*
+
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
 @Singleton
-class HomeController @Inject() (val controllerComponents: ControllerComponents)
+class HomeController @Inject() (val controllerComponents: ControllerComponents,
+  certService: CertificateService
+)
     extends BaseController {
 
   /**
@@ -26,5 +33,11 @@ class HomeController @Inject() (val controllerComponents: ControllerComponents)
 
   def index1 = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.mail())
+  }
+
+  def generateKey = Action.async { implicit request =>
+    // certService.generateKeyPair()
+    certService.generateP12WithBouncyCastle("TestSigner")
+    Future.successful(Ok(Json.obj("success" -> "generated")))
   }
 }
