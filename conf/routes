@@ -6,6 +6,8 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index()
 GET     /show                           controllers.HomeController.index1
+GET     /generate                   controllers.HomeController.generateKey
+
 
 # User Controller
 POST    /users                      controllers.UserController.create
