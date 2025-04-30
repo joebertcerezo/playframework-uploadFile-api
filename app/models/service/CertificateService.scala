@@ -203,7 +203,7 @@ class CertificateService @Inject() (
         subjectPublicKeyInfo
       )
       val signer = new JcaContentSignerBuilder("SHA256withRSA")
-      .build(privateKey)
+        .build(privateKey)
       val certHolder = certBuilder.build(signer)
       val certificate = new JcaX509CertificateConverter()
         .getCertificate(certHolder)
@@ -235,10 +235,9 @@ class CertificateService @Inject() (
 
       // val macCalculatorBuilder =
       //   new JcePKCS12MacCalculatorBuilder()
-      val pfx = pfxBuilder.build(null, storepass.toCharArray)
-      val pfxBytes  = pfx.getEncoded()
-      val p12Path   = keyDir.resolve("test.p12")
-
+      val pfx      = pfxBuilder.build(null, storepass.toCharArray)
+      val pfxBytes = pfx.getEncoded()
+      val p12Path  = keyDir.resolve("test.p12")
 
       val p12Output = new FileOutputStream(p12Path.toFile)
       try {
