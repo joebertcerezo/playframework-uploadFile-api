@@ -2,12 +2,12 @@ package controllers
 
 import javax.inject.*
 
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.*
+
 import play.api.*
 import play.api.mvc.*
 import play.api.libs.json.*
-
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.*
 
 import models.service.*
 
@@ -16,10 +16,10 @@ import models.service.*
  * application's home page.
  */
 @Singleton
-class HomeController @Inject() (val controllerComponents: ControllerComponents,
-  certService: CertificateService
-)
-    extends BaseController {
+class HomeController @Inject() (
+    val controllerComponents: ControllerComponents,
+    certService: CertificateService
+) extends BaseController {
 
   /**
    * Create an Action to render an HTML page.
