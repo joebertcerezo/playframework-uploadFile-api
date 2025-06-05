@@ -4,7 +4,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN sbt update
+RUN sbt reload
+RUN sbt compile
 RUN sbt stage
 
 EXPOSE 9000
